@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `address`
+--
+
+DROP TABLE IF EXISTS `address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `address` (
+  `AddressID` int NOT NULL,
+  `Street` varchar(255) NOT NULL,
+  `AreaCode` int NOT NULL,
+  `Suburb` varchar(100) NOT NULL,
+  PRIMARY KEY (`AddressID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `address`
+--
+
+LOCK TABLES `address` WRITE;
+/*!40000 ALTER TABLE `address` DISABLE KEYS */;
+/*!40000 ALTER TABLE `address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bookings`
 --
 
@@ -58,10 +83,10 @@ CREATE TABLE `customers` (
   `FullName` varchar(255) NOT NULL,
   `ContactPhone` varchar(45) NOT NULL,
   `ContactEmail` varchar(255) NOT NULL,
-  `Street` varchar(255) NOT NULL,
-  `AreaCode` int NOT NULL,
-  `Suburb` varchar(45) NOT NULL,
-  PRIMARY KEY (`CustomerID`)
+  `AddressID` int NOT NULL,
+  PRIMARY KEY (`CustomerID`),
+  KEY `address_id_fk_idx` (`AddressID`),
+  CONSTRAINT `address_id_fk` FOREIGN KEY (`AddressID`) REFERENCES `address` (`AddressID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -84,10 +109,7 @@ DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `MenuID` int NOT NULL AUTO_INCREMENT,
   `Cuisine` varchar(100) NOT NULL,
-  `Type` varchar(100) NOT NULL,
-  `ItemName` varchar(255) NOT NULL,
-  `ItemDescription` varchar(255) NOT NULL,
-  `ItemPrice` decimal(10,0) NOT NULL,
+  `MenuName` varchar(100) NOT NULL,
   PRIMARY KEY (`MenuID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -99,6 +121,34 @@ CREATE TABLE `menu` (
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menuitems`
+--
+
+DROP TABLE IF EXISTS `menuitems`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `menuitems` (
+  `MenuItemsID` int NOT NULL AUTO_INCREMENT,
+  `CourseName` varchar(255) NOT NULL,
+  `StarterName` varchar(255) NOT NULL,
+  `DesertName` varchar(255) NOT NULL,
+  `MenuID` int NOT NULL,
+  PRIMARY KEY (`MenuItemsID`),
+  KEY `menu_id_fk_idx` (`MenuID`),
+  CONSTRAINT `menu_id_fk` FOREIGN KEY (`MenuID`) REFERENCES `menu` (`MenuID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menuitems`
+--
+
+LOCK TABLES `menuitems` WRITE;
+/*!40000 ALTER TABLE `menuitems` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menuitems` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -199,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-22  9:29:28
+-- Dump completed on 2024-08-26  9:46:28
