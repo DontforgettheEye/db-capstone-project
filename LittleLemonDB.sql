@@ -60,7 +60,7 @@ CREATE TABLE `bookings` (
   KEY `bk_staff_id_fk_idx` (`StaffID`),
   CONSTRAINT `bk_customer_id_fk` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `bk_staff_id_fk` FOREIGN KEY (`StaffID`) REFERENCES `staff` (`StaffID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +69,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
+INSERT INTO `bookings` VALUES (3,'2022-10-11',2,2,'06:00:00',1),(4,'2022-10-13',2,1,'06:00:00',1),(7,'2024-10-13',3,1,'06:00:00',1),(10,'2024-11-13',2,1,'06:00:00',1),(12,'2024-09-13',2,1,'06:00:00',1),(13,'2024-11-13',3,1,'06:00:00',1),(16,'2024-08-13',3,1,'06:00:00',1),(18,'2024-06-13',3,1,'06:00:00',1);
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,4 +289,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-26 13:19:17
+-- Dump completed on 2024-08-28 11:15:26
